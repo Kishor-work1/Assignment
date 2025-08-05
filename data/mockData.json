@@ -1,0 +1,624 @@
+{
+  "patients": [
+    {
+      "id": "P001",
+      "name": "Sarah Johnson",
+      "age": 45,
+      "gender": "Female",
+      "bloodType": "A+",
+      "allergies": ["Penicillin", "Shellfish"],
+      "emergencyContact": "John Johnson - (555) 123-4567",
+      "admissionDate": "2024-06-15",
+      "room": "205A",
+      "status": "stable",
+      "vitals": [
+        {
+          "date": "2024-07-01",
+          "bloodPressure": { "systolic": 118, "diastolic": 78 },
+          "heartRate": 70,
+          "temperature": 98.4,
+          "weight": 65.2
+        },
+        {
+          "date": "2024-07-03",
+          "bloodPressure": { "systolic": 122, "diastolic": 82 },
+          "heartRate": 74,
+          "temperature": 98.6,
+          "weight": 65.0
+        },
+        {
+          "date": "2024-07-05",
+          "bloodPressure": { "systolic": 120, "diastolic": 80 },
+          "heartRate": 72,
+          "temperature": 98.5,
+          "weight": 64.8
+        },
+        {
+          "date": "2024-07-08",
+          "bloodPressure": { "systolic": 125, "diastolic": 85 },
+          "heartRate": 76,
+          "temperature": 98.7,
+          "weight": 64.9
+        },
+        {
+          "date": "2024-07-10",
+          "bloodPressure": { "systolic": 119, "diastolic": 79 },
+          "heartRate": 71,
+          "temperature": 98.3,
+          "weight": 64.7
+        },
+        {
+          "date": "2024-07-12",
+          "bloodPressure": { "systolic": 123, "diastolic": 81 },
+          "heartRate": 73,
+          "temperature": 98.6,
+          "weight": 64.5
+        },
+        {
+          "date": "2024-07-15",
+          "bloodPressure": { "systolic": 121, "diastolic": 80 },
+          "heartRate": 72,
+          "temperature": 98.4,
+          "weight": 64.3
+        },
+        {
+          "date": "2024-07-18",
+          "bloodPressure": { "systolic": 117, "diastolic": 77 },
+          "heartRate": 69,
+          "temperature": 98.2,
+          "weight": 64.1
+        },
+        {
+          "date": "2024-07-20",
+          "bloodPressure": { "systolic": 120, "diastolic": 78 },
+          "heartRate": 71,
+          "temperature": 98.5,
+          "weight": 63.9
+        },
+        {
+          "date": "2024-07-22",
+          "bloodPressure": { "systolic": 118, "diastolic": 76 },
+          "heartRate": 70,
+          "temperature": 98.3,
+          "weight": 63.8
+        },
+        {
+          "date": "2024-07-25",
+          "bloodPressure": { "systolic": 122, "diastolic": 80 },
+          "heartRate": 73,
+          "temperature": 98.6,
+          "weight": 63.6
+        },
+        {
+          "date": "2024-07-28",
+          "bloodPressure": { "systolic": 119, "diastolic": 78 },
+          "heartRate": 71,
+          "temperature": 98.4,
+          "weight": 63.5
+        },
+        {
+          "date": "2024-07-30",
+          "bloodPressure": { "systolic": 121, "diastolic": 79 },
+          "heartRate": 72,
+          "temperature": 98.5,
+          "weight": 63.4
+        }
+      ],
+      "medications": [
+        {
+          "id": "M001",
+          "name": "Lisinopril",
+          "dosage": "10mg",
+          "frequency": "Once daily",
+          "prescribedDate": "2024-06-15",
+          "instructions": "Take with or without food",
+          "prescribedBy": "Dr. Smith",
+          "status": "active",
+          "schedule": [
+            { "date": "2024-08-01", "time": "08:00", "taken": true },
+            { "date": "2024-08-02", "time": "08:00", "taken": false },
+            { "date": "2024-08-03", "time": "08:00", "taken": false }
+          ]
+        },
+        {
+          "id": "M002",
+          "name": "Metformin",
+          "dosage": "500mg",
+          "frequency": "Twice daily",
+          "prescribedDate": "2024-06-20",
+          "instructions": "Take with meals",
+          "prescribedBy": "Dr. Williams",
+          "status": "active",
+          "schedule": [
+            { "date": "2024-08-01", "time": "08:00", "taken": true },
+            { "date": "2024-08-01", "time": "20:00", "taken": true },
+            { "date": "2024-08-02", "time": "08:00", "taken": false },
+            { "date": "2024-08-02", "time": "20:00", "taken": false }
+          ]
+        },
+        {
+          "id": "M003",
+          "name": "Vitamin D3",
+          "dosage": "1000 IU",
+          "frequency": "Once daily",
+          "prescribedDate": "2024-07-01",
+          "instructions": "Take with fatty meal for better absorption",
+          "prescribedBy": "Dr. Smith",
+          "status": "active",
+          "schedule": [
+            { "date": "2024-08-01", "time": "12:00", "taken": true },
+            { "date": "2024-08-02", "time": "12:00", "taken": false }
+          ]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A001",
+          "date": "2024-08-05",
+          "time": "10:00 AM",
+          "doctor": "Dr. Smith",
+          "specialty": "Cardiology",
+          "type": "Follow-up",
+          "status": "scheduled",
+          "location": "Room 302",
+          "notes": "Blood pressure check and medication review"
+        },
+        {
+          "id": "A002",
+          "date": "2024-08-12",
+          "time": "02:30 PM",
+          "doctor": "Dr. Williams",
+          "specialty": "Endocrinology",
+          "type": "Routine Check",
+          "status": "scheduled",
+          "location": "Room 205",
+          "notes": "Diabetes management consultation"
+        },
+        {
+          "id": "A003",
+          "date": "2024-07-20",
+          "time": "09:00 AM",
+          "doctor": "Dr. Brown",
+          "specialty": "General Medicine",
+          "type": "Consultation",
+          "status": "completed",
+          "location": "Room 101",
+          "notes": "Initial assessment completed. Patient stable."
+        }
+      ]
+    },
+    {
+      "id": "P002",
+      "name": "Michael Chen",
+      "age": 32,
+      "gender": "Male",
+      "bloodType": "O-",
+      "allergies": ["Latex"],
+      "emergencyContact": "Lisa Chen - (555) 987-6543",
+      "admissionDate": "2024-07-10",
+      "room": "118B",
+      "status": "monitoring",
+      "vitals": [
+        {
+          "date": "2024-07-15",
+          "bloodPressure": { "systolic": 130, "diastolic": 88 },
+          "heartRate": 85,
+          "temperature": 99.1,
+          "weight": 78.5
+        },
+        {
+          "date": "2024-07-18",
+          "bloodPressure": { "systolic": 128, "diastolic": 85 },
+          "heartRate": 82,
+          "temperature": 98.8,
+          "weight": 78.3
+        },
+        {
+          "date": "2024-07-20",
+          "bloodPressure": { "systolic": 125, "diastolic": 82 },
+          "heartRate": 80,
+          "temperature": 98.6,
+          "weight": 78.1
+        },
+        {
+          "date": "2024-07-22",
+          "bloodPressure": { "systolic": 122, "diastolic": 80 },
+          "heartRate": 78,
+          "temperature": 98.4,
+          "weight": 77.9
+        },
+        {
+          "date": "2024-07-25",
+          "bloodPressure": { "systolic": 120, "diastolic": 78 },
+          "heartRate": 75,
+          "temperature": 98.2,
+          "weight": 77.8
+        },
+        {
+          "date": "2024-07-28",
+          "bloodPressure": { "systolic": 118, "diastolic": 76 },
+          "heartRate": 73,
+          "temperature": 98.1,
+          "weight": 77.6
+        },
+        {
+          "date": "2024-07-30",
+          "bloodPressure": { "systolic": 116, "diastolic": 74 },
+          "heartRate": 72,
+          "temperature": 98.0,
+          "weight": 77.4
+        }
+      ],
+      "medications": [
+        {
+          "id": "M004",
+          "name": "Ibuprofen",
+          "dosage": "400mg",
+          "frequency": "As needed",
+          "prescribedDate": "2024-07-10",
+          "instructions": "Take with food. Maximum 3 times daily",
+          "prescribedBy": "Dr. Garcia",
+          "status": "active",
+          "schedule": [
+            { "date": "2024-08-01", "time": "14:00", "taken": true },
+            { "date": "2024-08-02", "time": "10:00", "taken": false }
+          ]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A004",
+          "date": "2024-08-08",
+          "time": "11:30 AM",
+          "doctor": "Dr. Garcia",
+          "specialty": "Orthopedics",
+          "type": "Follow-up",
+          "status": "scheduled",
+          "location": "Room 401",
+          "notes": "Post-injury assessment"
+        }
+      ]
+    },
+    {
+      "id": "P003",
+      "name": "Emily Rodriguez",
+      "age": 28,
+      "gender": "Female",
+      "bloodType": "B+",
+      "allergies": ["Aspirin", "Peanuts"],
+      "emergencyContact": "Carlos Rodriguez - (555) 456-7890",
+      "admissionDate": "2024-07-25",
+      "room": "310A",
+      "status": "critical",
+      "vitals": [
+        {
+          "date": "2024-07-26",
+          "bloodPressure": { "systolic": 95, "diastolic": 60 },
+          "heartRate": 110,
+          "temperature": 101.2,
+          "weight": 58.2
+        },
+        {
+          "date": "2024-07-27",
+          "bloodPressure": { "systolic": 100, "diastolic": 65 },
+          "heartRate": 105,
+          "temperature": 100.8,
+          "weight": 58.0
+        },
+        {
+          "date": "2024-07-28",
+          "bloodPressure": { "systolic": 105, "diastolic": 68 },
+          "heartRate": 98,
+          "temperature": 100.1,
+          "weight": 57.8
+        },
+        {
+          "date": "2024-07-29",
+          "bloodPressure": { "systolic": 110, "diastolic": 70 },
+          "heartRate": 92,
+          "temperature": 99.5,
+          "weight": 57.9
+        },
+        {
+          "date": "2024-07-30",
+          "bloodPressure": { "systolic": 115, "diastolic": 75 },
+          "heartRate": 88,
+          "temperature": 99.0,
+          "weight": 58.1
+        }
+      ],
+      "medications": [
+        {
+          "id": "M005",
+          "name": "Amoxicillin",
+          "dosage": "500mg",
+          "frequency": "Three times daily",
+          "prescribedDate": "2024-07-25",
+          "instructions": "Take with food to reduce stomach upset",
+          "prescribedBy": "Dr. Johnson",
+          "status": "active",
+          "schedule": [
+            { "date": "2024-08-01", "time": "08:00", "taken": true },
+            { "date": "2024-08-01", "time": "14:00", "taken": true },
+            { "date": "2024-08-01", "time": "20:00", "taken": false },
+            { "date": "2024-08-02", "time": "08:00", "taken": false }
+          ]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A005",
+          "date": "2024-08-03",
+          "time": "08:00 AM",
+          "doctor": "Dr. Johnson",
+          "specialty": "Internal Medicine",
+          "type": "Emergency Follow-up",
+          "status": "scheduled",
+          "location": "ICU Room 3",
+          "notes": "Critical condition monitoring"
+        }
+      ]
+    },
+    {
+      "id": "P004",
+      "name": "David Lee",
+      "age": 54,
+      "gender": "Male",
+      "bloodType": "AB+",
+      "allergies": ["Sulfa drugs"],
+      "emergencyContact": "Anna Lee - (555) 222-3344",
+      "admissionDate": "2024-07-05",
+      "room": "212C",
+      "status": "stable",
+      "vitals": [
+        {
+          "date": "2024-07-06",
+          "bloodPressure": { "systolic": 117, "diastolic": 76 },
+          "heartRate": 68,
+          "temperature": 98.2,
+          "weight": 82.0
+        },
+        {
+          "date": "2024-07-15",
+          "bloodPressure": { "systolic": 120, "diastolic": 78 },
+          "heartRate": 70,
+          "temperature": 98.4,
+          "weight": 81.5
+        },
+        {
+          "date": "2024-07-25",
+          "bloodPressure": { "systolic": 119, "diastolic": 77 },
+          "heartRate": 69,
+          "temperature": 98.3,
+          "weight": 81.2
+        }
+      ],
+      "medications": [
+        {
+          "id": "M006",
+          "name": "Atorvastatin",
+          "dosage": "20mg",
+          "frequency": "Once daily",
+          "prescribedDate": "2024-07-05",
+          "instructions": "Take in the evening",
+          "prescribedBy": "Dr. Patel",
+          "status": "active",
+          "schedule": [{ "date": "2024-08-01", "time": "21:00", "taken": true }]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A006",
+          "date": "2024-08-10",
+          "time": "09:00 AM",
+          "doctor": "Dr. Patel",
+          "specialty": "Cardiology",
+          "type": "Routine Check",
+          "status": "scheduled",
+          "location": "Room 212",
+          "notes": "Cholesterol follow-up"
+        }
+      ]
+    },
+    {
+      "id": "P005",
+      "name": "Priya Singh",
+      "age": 39,
+      "gender": "Female",
+      "bloodType": "O+",
+      "allergies": ["None"],
+      "emergencyContact": "Raj Singh - (555) 333-4455",
+      "admissionDate": "2024-07-12",
+      "room": "119A",
+      "status": "monitoring",
+      "vitals": [
+        {
+          "date": "2024-07-13",
+          "bloodPressure": { "systolic": 124, "diastolic": 82 },
+          "heartRate": 76,
+          "temperature": 98.7,
+          "weight": 70.0
+        },
+        {
+          "date": "2024-07-20",
+          "bloodPressure": { "systolic": 122, "diastolic": 80 },
+          "heartRate": 74,
+          "temperature": 98.5,
+          "weight": 69.7
+        },
+        {
+          "date": "2024-07-28",
+          "bloodPressure": { "systolic": 120, "diastolic": 78 },
+          "heartRate": 72,
+          "temperature": 98.3,
+          "weight": 69.5
+        }
+      ],
+      "medications": [
+        {
+          "id": "M007",
+          "name": "Levothyroxine",
+          "dosage": "50mcg",
+          "frequency": "Once daily",
+          "prescribedDate": "2024-07-12",
+          "instructions": "Take on empty stomach",
+          "prescribedBy": "Dr. Kim",
+          "status": "active",
+          "schedule": [{ "date": "2024-08-01", "time": "07:00", "taken": true }]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A007",
+          "date": "2024-08-15",
+          "time": "08:30 AM",
+          "doctor": "Dr. Kim",
+          "specialty": "Endocrinology",
+          "type": "Follow-up",
+          "status": "scheduled",
+          "location": "Room 119",
+          "notes": "Thyroid function review"
+        }
+      ]
+    },
+    {
+      "id": "P006",
+      "name": "James Miller",
+      "age": 61,
+      "gender": "Male",
+      "bloodType": "A-",
+      "allergies": ["Codeine"],
+      "emergencyContact": "Linda Miller - (555) 444-5566",
+      "admissionDate": "2024-07-18",
+      "room": "220B",
+      "status": "stable",
+      "vitals": [
+        {
+          "date": "2024-07-19",
+          "bloodPressure": { "systolic": 115, "diastolic": 75 },
+          "heartRate": 67,
+          "temperature": 98.1,
+          "weight": 90.0
+        },
+        {
+          "date": "2024-07-25",
+          "bloodPressure": { "systolic": 117, "diastolic": 76 },
+          "heartRate": 68,
+          "temperature": 98.2,
+          "weight": 89.7
+        },
+        {
+          "date": "2024-07-31",
+          "bloodPressure": { "systolic": 116, "diastolic": 75 },
+          "heartRate": 67,
+          "temperature": 98.1,
+          "weight": 89.5
+        }
+      ],
+      "medications": [
+        {
+          "id": "M008",
+          "name": "Amlodipine",
+          "dosage": "5mg",
+          "frequency": "Once daily",
+          "prescribedDate": "2024-07-18",
+          "instructions": "Take at the same time each day",
+          "prescribedBy": "Dr. Brown",
+          "status": "active",
+          "schedule": [{ "date": "2024-08-01", "time": "09:00", "taken": true }]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A008",
+          "date": "2024-08-20",
+          "time": "10:00 AM",
+          "doctor": "Dr. Brown",
+          "specialty": "General Medicine",
+          "type": "Routine Check",
+          "status": "scheduled",
+          "location": "Room 220",
+          "notes": "Blood pressure follow-up"
+        }
+      ]
+    },
+    {
+      "id": "P007",
+      "name": "Fatima Al-Farsi",
+      "age": 26,
+      "gender": "Female",
+      "bloodType": "B-",
+      "allergies": ["None"],
+      "emergencyContact": "Omar Al-Farsi - (555) 555-6677",
+      "admissionDate": "2024-07-22",
+      "room": "315C",
+      "status": "monitoring",
+      "vitals": [
+        {
+          "date": "2024-07-23",
+          "bloodPressure": { "systolic": 110, "diastolic": 70 },
+          "heartRate": 80,
+          "temperature": 98.6,
+          "weight": 54.0
+        },
+        {
+          "date": "2024-07-28",
+          "bloodPressure": { "systolic": 112, "diastolic": 72 },
+          "heartRate": 78,
+          "temperature": 98.4,
+          "weight": 53.8
+        },
+        {
+          "date": "2024-07-31",
+          "bloodPressure": { "systolic": 113, "diastolic": 73 },
+          "heartRate": 77,
+          "temperature": 98.3,
+          "weight": 53.7
+        }
+      ],
+      "medications": [
+        {
+          "id": "M009",
+          "name": "Paracetamol",
+          "dosage": "500mg",
+          "frequency": "As needed",
+          "prescribedDate": "2024-07-22",
+          "instructions": "Take for fever or pain",
+          "prescribedBy": "Dr. Ahmed",
+          "status": "active",
+          "schedule": [{ "date": "2024-08-01", "time": "13:00", "taken": false }]
+        }
+      ],
+      "appointments": [
+        {
+          "id": "A009",
+          "date": "2024-08-18",
+          "time": "11:00 AM",
+          "doctor": "Dr. Ahmed",
+          "specialty": "General Medicine",
+          "type": "Follow-up",
+          "status": "scheduled",
+          "location": "Room 315",
+          "notes": "Fever monitoring"
+        }
+      ]
+    }
+  ],
+  "normalRanges": {
+    "bloodPressure": {
+      "systolic": { "min": 90, "max": 120 },
+      "diastolic": { "min": 60, "max": 80 }
+    },
+    "heartRate": { "min": 60, "max": 100 },
+    "temperature": { "min": 97.0, "max": 99.0 },
+    "weight": { "min": 0, "max": 500 }
+  },
+  "criticalRanges": {
+    "bloodPressure": {
+      "systolic": { "critical_low": 70, "critical_high": 180 },
+      "diastolic": { "critical_low": 40, "critical_high": 110 }
+    },
+    "heartRate": { "critical_low": 40, "critical_high": 150 },
+    "temperature": { "critical_low": 95.0, "critical_high": 103.0 }
+  }
+}
