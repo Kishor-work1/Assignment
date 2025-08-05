@@ -1,7 +1,6 @@
 "use client"
 
 import { Sidebar } from "@/components/Sidebar"
-import { PatientHeader } from "@/components/PatientHeader"
 import VitalsChart from "./VitalsChart"
 import { MedicationCard } from "@/components/MedicationCard"
 import { AppointmentCalendar } from "@/components/AppointmentCalendar"
@@ -12,6 +11,7 @@ import HealthScore from "./HealthScore"
 import { SmartAlerts } from "@/components/SmartAlerts"
 import MedicationManagement from "./MedicationManagement"
 import { usePatient } from "@/context/PatientContext"
+import { PatientHeader } from "./PatientHeader"
 
 export function PatientDashboard() {
   const { selectedPatient, activeSection, normalRanges, criticalRanges, filteredData, searchQuery } =
