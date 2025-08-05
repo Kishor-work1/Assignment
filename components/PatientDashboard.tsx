@@ -8,7 +8,7 @@ import { AppointmentCalendar } from "@/components/AppointmentCalendar"
 import { PatientSelector } from "@/components/PatientSelector"
 import { AddVitalForm } from "@/components/AddVitalForm"
 import { SearchAndFilter } from "@/components/SearchAndFilter"
-import { HealthScore } from "@/components/HealthScore"
+import HealthScore from "./HealthScore"
 import { SmartAlerts } from "@/components/SmartAlerts"
 import MedicationManagement from "./MedicationManagement"
 import { usePatient } from "@/context/PatientContext"
@@ -147,7 +147,7 @@ export function PatientDashboard() {
               <>
                 <SmartAlerts alerts={getSmartAlerts()} />
                 <PatientHeader />
-                <HealthScore />
+                <HealthScore/>
               </>
             )}
             {renderSectionContent()}                                                                           
