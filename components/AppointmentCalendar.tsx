@@ -38,7 +38,6 @@ export function AppointmentCalendar({ appointments: propAppointments, detailed =
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredAppointment, setHoveredAppointment] = useState<string | null>(null)
 
-  // Use prop appointments if provided, otherwise use patient appointments from context
   const appointments = propAppointments || selectedPatient?.appointments || []
 
   useEffect(() => {

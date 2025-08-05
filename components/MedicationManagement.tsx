@@ -1,76 +1,53 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import {
-  Pill,
-  Plus,
-  Clock,
-  Check,
-  X,
-  User,
-  Calendar,
-  Shield,
-  Activity,
-  FileText,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { usePatient } from "@/context/PatientContext";
+import { useState } from "react"
+import { Pill, Plus, Clock, Check, X, User, Calendar, Shield, Activity, FileText } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+import { usePatient } from "@/context/PatientContext"
 
 interface Medication {
-  id: string;
-  name: string;
-  dosage: string;
-  frequency: string;
-  instructions: string;
-  prescribedBy: string;
-  prescribedDate: string;
-  status: string;
-  schedule: Schedule[];
+  id: string
+  name: string
+  dosage: string
+  frequency: string
+  instructions: string
+  prescribedBy: string
+  prescribedDate: string
+  status: string
+  schedule: Schedule[]
 }
 
 interface Schedule {
-  date: string;
-  time: string;
-  taken: boolean;
+  date: string
+  time: string
+  taken: boolean
 }
 
 interface NewMedication {
-  name: string;
-  dosage: string;
-  frequency: string;
-  instructions: string;
-  prescribedBy: string;
+  name: string
+  dosage: string
+  frequency: string
+  instructions: string
+  prescribedBy: string
 }
 
 export default function MedicationManagement() {
-  const {
-    patients,
-    selectedPatient,
-    setSelectedPatientId,
-    addNewMedication,
-    updateMedicationSchedule,
-  } = usePatient();
-  const [showAddForm, setShowAddForm] = useState<boolean>(false);
+  const { patients, selectedPatient, setSelectedPatientId, addNewMedication, updateMedicationSchedule } = usePatient()
+  const [showAddForm, setShowAddForm] = useState<boolean>(false)
   const [newMedication, setNewMedication] = useState<NewMedication>({
     name: "",
     dosage: "",
     frequency: "",
     instructions: "",
     prescribedBy: "",
-  });
+  })
 
   if (!selectedPatient) {
     return (
@@ -80,20 +57,14 @@ export default function MedicationManagement() {
             <div className="w-16 h-16 bg-gray-100 rounded-lg mx-auto flex items-center justify-center">
               <User className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No patient selected
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Please select a patient to view their medication management.
-            </p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No patient selected</h3>
+            <p className="text-gray-600 mb-6">Please select a patient to view their medication management.</p>
             <div className="space-y-2">
               <Label htmlFor="patient-select" className="sr-only">
                 Select Patient
               </Label>
-              <Select
-                onValueChange={(value) => setSelectedPatientId(value as string)}
-                // value={selectedPatient}
-              >
+              {/* Removed explicit generic type */}
+              <Select onValueChange={setSelectedPatientId} >
                 <SelectTrigger
                   id="patient-select"
                   className="w-full border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -112,29 +83,15 @@ export default function MedicationManagement() {
           </CardContent>
         </Card>
       </div>
-    );
+    )
   }
 
-  const handleMarkTaken = (
-    medicationId: string,
-    scheduleIndex: number,
-    taken: boolean
-  ) => {
-    updateMedicationSchedule(
-      selectedPatient.id,
-      medicationId,
-      scheduleIndex,
-      taken
-    );
-  };
+  const handleMarkTaken = (medicationId: string, scheduleIndex: number, taken: boolean) => {
+    updateMedicationSchedule(selectedPatient.id, medicationId, scheduleIndex, taken)
+  }
 
   const handleAddMedication = () => {
-    if (
-      !newMedication.name ||
-      !newMedication.dosage ||
-      !newMedication.frequency
-    )
-      return;
+    if (!newMedication.name || !newMedication.dosage || !newMedication.frequency) return
 
     const medication: Medication = {
       id: `M${Date.now()}`,
@@ -142,58 +99,50 @@ export default function MedicationManagement() {
       prescribedDate: new Date().toISOString().split("T")[0],
       status: "active",
       schedule: generateSchedule(newMedication.frequency),
-    };
-    addNewMedication(selectedPatient.id, medication);
-    setNewMedication({
-      name: "",
-      dosage: "",
-      frequency: "",
-      instructions: "",
-      prescribedBy: "",
-    });
-    setShowAddForm(false);
-  };
+    }
+    addNewMedication(selectedPatient.id, medication)
+    setNewMedication({ name: "", dosage: "", frequency: "", instructions: "", prescribedBy: "" })
+    setShowAddForm(false)
+  }
 
   const generateSchedule = (frequency: string): Schedule[] => {
-    const schedule: Schedule[] = [];
-    const today = new Date();
+    const schedule: Schedule[] = []
+    const today = new Date()
     for (let i = 0; i < 7; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      const dateStr = date.toISOString().split("T")[0];
+      const date = new Date(today)
+      date.setDate(today.getDate() + i)
+      const dateStr = date.toISOString().split("T")[0]
       if (frequency === "Once daily") {
-        schedule.push({ date: dateStr, time: "08:00", taken: false });
+        schedule.push({ date: dateStr, time: "08:00", taken: false })
       } else if (frequency === "Twice daily") {
-        schedule.push({ date: dateStr, time: "08:00", taken: false });
-        schedule.push({ date: dateStr, time: "20:00", taken: false });
+        schedule.push({ date: dateStr, time: "08:00", taken: false })
+        schedule.push({ date: dateStr, time: "20:00", taken: false })
       } else if (frequency === "Three times daily") {
-        schedule.push({ date: dateStr, time: "08:00", taken: false });
-        schedule.push({ date: dateStr, time: "14:00", taken: false });
-        schedule.push({ date: dateStr, time: "20:00", taken: false });
+        schedule.push({ date: dateStr, time: "08:00", taken: false })
+        schedule.push({ date: dateStr, time: "14:00", taken: false })
+        schedule.push({ date: dateStr, time: "20:00", taken: false })
       }
     }
-    return schedule;
-  };
+    return schedule
+  }
 
   const getStatusColor = (status: string): string => {
     switch (status) {
       case "active":
-        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+        return "bg-emerald-50 text-emerald-700 border-emerald-200"
       case "paused":
-        return "bg-amber-50 text-amber-700 border-amber-200";
+        return "bg-amber-50 text-amber-700 border-amber-200"
       case "discontinued":
-        return "bg-red-50 text-red-700 border-red-200";
+        return "bg-red-50 text-red-700 border-red-200"
       default:
-        return "bg-gray-50 text-gray-700 border-gray-200";
+        return "bg-gray-50 text-gray-700 border-gray-200"
     }
-  };
+  }
 
   const getAdherenceRate = (schedule: Schedule[]): number => {
-    if (schedule.length === 0) return 0;
-    return Math.round(
-      (schedule.filter((s) => s.taken).length / schedule.length) * 100
-    );
-  };
+    if (schedule.length === 0) return 0
+    return Math.round((schedule.filter((s) => s.taken).length / schedule.length) * 100)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
@@ -206,17 +155,13 @@ export default function MedicationManagement() {
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Medication Management
-                </h1>
+                <h1 className="text-2xl font-semibold text-gray-900">Medication Management</h1>
                 <p className="text-sm text-gray-600 mt-1">
-                  Patient:{" "}
-                  <span className="font-medium">{selectedPatient.name}</span> •
-                  ID: {selectedPatient.id}
+                  Patient: <span className="font-medium">{selectedPatient.name}</span> • ID: {selectedPatient.id}
                 </p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-3">
+            <div className="flex flex-wrap items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-3">
               <div className="flex items-center text-sm text-gray-500">
                 <Shield className="w-4 h-4 mr-1.5" />
                 <span>HIPAA Compliant</span>
@@ -225,10 +170,8 @@ export default function MedicationManagement() {
                 <Label htmlFor="patient-select-header" className="sr-only">
                   Select Patient
                 </Label>
-                <Select
-                  onValueChange={setSelectedPatientId}
-                  value={selectedPatient.id}
-                >
+                {/* Removed explicit generic type */}
+                <Select onValueChange={setSelectedPatientId} value={selectedPatient.id} >
                   <SelectTrigger
                     id="patient-select-header"
                     className="w-[180px] border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -243,14 +186,15 @@ export default function MedicationManagement() {
                     ))}
                   </SelectContent>
                 </Select>
-                <Button
+                
+              </div>
+              <Button
                   onClick={() => setShowAddForm(true)}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-sm transition-colors duration-200"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Add Prescription
                 </Button>
-              </div>
             </div>
           </div>
         </div>
@@ -282,113 +226,69 @@ export default function MedicationManagement() {
                 <CardContent className="p-6 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="medName"
-                        className="text-sm font-medium text-gray-700"
-                      >
+                      <Label htmlFor="medName" className="text-sm font-medium text-gray-700">
                         Medication Name <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="medName"
                         value={newMedication.name}
-                        onChange={(e) =>
-                          setNewMedication({
-                            ...newMedication,
-                            name: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewMedication({ ...newMedication, name: e.target.value })}
                         placeholder="e.g., Lisinopril"
                         className="border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="dosage"
-                        className="text-sm font-medium text-gray-700"
-                      >
+                      <Label htmlFor="dosage" className="text-sm font-medium text-gray-700">
                         Dosage <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="dosage"
                         value={newMedication.dosage}
-                        onChange={(e) =>
-                          setNewMedication({
-                            ...newMedication,
-                            dosage: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewMedication({ ...newMedication, dosage: e.target.value })}
                         placeholder="e.g., 10mg"
                         className="border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="frequency"
-                        className="text-sm font-medium text-gray-700"
-                      >
+                      <Label htmlFor="frequency" className="text-sm font-medium text-gray-700">
                         Frequency <span className="text-red-500">*</span>
                       </Label>
                       <Select
                         value={newMedication.frequency}
-                        onValueChange={(value) =>
-                          setNewMedication({
-                            ...newMedication,
-                            frequency: value,
-                          })
-                        }
+                        onValueChange={(value) => setNewMedication({ ...newMedication, frequency: value })}
                       >
                         <SelectTrigger className="border-gray-300 focus:ring-blue-500 focus:border-blue-500">
                           <SelectValue placeholder="Select frequency" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="Once daily">Once daily</SelectItem>
-                          <SelectItem value="Twice daily">
-                            Twice daily
-                          </SelectItem>
-                          <SelectItem value="Three times daily">
-                            Three times daily
-                          </SelectItem>
+                          <SelectItem value="Twice daily">Twice daily</SelectItem>
+                          <SelectItem value="Three times daily">Three times daily</SelectItem>
                           <SelectItem value="As needed">As needed</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="prescribedBy"
-                        className="text-sm font-medium text-gray-700"
-                      >
+                      <Label htmlFor="prescribedBy" className="text-sm font-medium text-gray-700">
                         Prescribed By
                       </Label>
                       <Input
                         id="prescribedBy"
                         value={newMedication.prescribedBy}
-                        onChange={(e) =>
-                          setNewMedication({
-                            ...newMedication,
-                            prescribedBy: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewMedication({ ...newMedication, prescribedBy: e.target.value })}
                         placeholder="e.g., Dr. Smith"
                         className="border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="instructions"
-                      className="text-sm font-medium text-gray-700"
-                    >
+                    <Label htmlFor="instructions" className="text-sm font-medium text-gray-700">
                       Instructions
                     </Label>
                     <Textarea
                       id="instructions"
                       value={newMedication.instructions}
-                      onChange={(e) =>
-                        setNewMedication({
-                          ...newMedication,
-                          instructions: e.target.value,
-                        })
-                      }
+                      onChange={(e) => setNewMedication({ ...newMedication, instructions: e.target.value })}
                       placeholder="e.g., Take with food in the morning"
                       rows={3}
                       className="border-gray-300 focus:ring-blue-500 focus:border-blue-500 resize-none"
@@ -418,15 +318,10 @@ export default function MedicationManagement() {
         {/* Medications List */}
         <div className="space-y-6">
           {selectedPatient.medications.map((medication: Medication) => {
-            const adherenceRate = getAdherenceRate(medication.schedule);
-            const todaySchedule = medication.schedule.filter(
-              (s) => s.date === new Date().toISOString().split("T")[0]
-            );
+            const adherenceRate = getAdherenceRate(medication.schedule)
+            const todaySchedule = medication.schedule.filter((s) => s.date === new Date().toISOString().split("T")[0])
             return (
-              <Card
-                key={medication.id}
-                className="bg-white shadow-sm border border-gray-200"
-              >
+              <Card key={medication.id} className="bg-white shadow-sm border border-gray-200">
                 <CardContent className="p-6">
                   {/* Medication Header */}
                   <div className="flex flex-col lg:flex-row items-start justify-between mb-6 space-y-4 lg:space-y-0">
@@ -436,15 +331,8 @@ export default function MedicationManagement() {
                       </div>
                       <div className="space-y-2 flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-1 sm:space-y-0">
-                          <h3 className="text-xl font-semibold text-gray-900">
-                            {medication.name}
-                          </h3>
-                          <Badge
-                            className={cn(
-                              "text-xs px-2 py-1 w-fit",
-                              getStatusColor(medication.status)
-                            )}
-                          >
+                          <h3 className="text-xl font-semibold text-gray-900">{medication.name}</h3>
+                          <Badge className={cn("text-xs px-2 py-1 w-fit", getStatusColor(medication.status))}>
                             {medication.status.toUpperCase()}
                           </Badge>
                         </div>
@@ -459,28 +347,22 @@ export default function MedicationManagement() {
                           <span className="hidden sm:inline">•</span>
                           <div className="flex items-center space-x-1">
                             <Calendar className="w-4 h-4" />
-                            <span>
-                              {new Date(
-                                medication.prescribedDate
-                              ).toLocaleDateString()}
-                            </span>
+                            <span>{new Date(medication.prescribedDate).toLocaleDateString()}</span>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-6">
                       <div className="text-center">
-                        <div className="text-sm text-gray-500 mb-1">
-                          Adherence Rate
-                        </div>
+                        <div className="text-sm text-gray-500 mb-1">Adherence Rate</div>
                         <div
                           className={cn(
                             "text-2xl font-bold",
                             adherenceRate >= 80
                               ? "text-emerald-600"
                               : adherenceRate >= 60
-                              ? "text-amber-600"
-                              : "text-red-600"
+                                ? "text-amber-600"
+                                : "text-red-600",
                           )}
                         >
                           {adherenceRate}%
@@ -495,12 +377,8 @@ export default function MedicationManagement() {
                       <div className="flex items-start space-x-2">
                         <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-medium text-blue-900 mb-1">
-                            Instructions:
-                          </p>
-                          <p className="text-sm text-blue-800">
-                            {medication.instructions}
-                          </p>
+                          <p className="text-sm font-medium text-blue-900 mb-1">Instructions:</p>
+                          <p className="text-sm text-blue-800">{medication.instructions}</p>
                         </div>
                       </div>
                     </div>
@@ -513,74 +391,54 @@ export default function MedicationManagement() {
                       <span>Today's Schedule</span>
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {todaySchedule.map(
-                        (schedule: Schedule, index: number) => (
-                          <div
-                            key={index}
-                            className={cn(
-                              "p-4 rounded-lg border-2 transition-all duration-200",
-                              schedule.taken
-                                ? "bg-emerald-50 border-emerald-200"
-                                : "bg-gray-50 border-gray-200 hover:border-blue-300"
-                            )}
-                          >
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="font-semibold text-gray-900">
-                                  {schedule.time}
-                                </p>
-                                <p className="text-sm text-gray-600">
-                                  {medication.dosage}
-                                </p>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                {schedule.taken ? (
-                                  <div className="flex items-center space-x-2 text-emerald-600">
-                                    <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
-                                      <Check className="w-4 h-4 text-white" />
-                                    </div>
-                                    <span className="text-sm font-medium hidden sm:inline">
-                                      Taken
-                                    </span>
+                      {todaySchedule.map((schedule: Schedule, index: number) => (
+                        <div
+                          key={index}
+                          className={cn(
+                            "p-4 rounded-lg border-2 transition-all duration-200",
+                            schedule.taken
+                              ? "bg-emerald-50 border-emerald-200"
+                              : "bg-gray-50 border-gray-200 hover:border-blue-300",
+                          )}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="font-semibold text-gray-900">{schedule.time}</p>
+                              <p className="text-sm text-gray-600">{medication.dosage}</p>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              {schedule.taken ? (
+                                <div className="flex items-center space-x-2 text-emerald-600">
+                                  <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+                                    <Check className="w-4 h-4 text-white" />
                                   </div>
-                                ) : (
-                                  <div className="flex space-x-2">
-                                    <Button
-                                      size="sm"
-                                      onClick={() =>
-                                        handleMarkTaken(
-                                          medication.id,
-                                          index,
-                                          true
-                                        )
-                                      }
-                                      className="w-8 h-8 p-0 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full"
-                                      aria-label="Mark as taken"
-                                    >
-                                      <Check className="w-4 h-4" />
-                                    </Button>
-                                    <Button
-                                      size="sm"
-                                      variant="outline"
-                                      onClick={() =>
-                                        handleMarkTaken(
-                                          medication.id,
-                                          index,
-                                          false
-                                        )
-                                      }
-                                      className="w-8 h-8 p-0 border-red-300 text-red-600 hover:bg-red-50 rounded-full"
-                                      aria-label="Mark as not taken"
-                                    >
-                                      <X className="w-4 h-4" />
-                                    </Button>
-                                  </div>
-                                )}
-                              </div>
+                                  <span className="text-sm font-medium hidden sm:inline">Taken</span>
+                                </div>
+                              ) : (
+                                <div className="flex space-x-2">
+                                  <Button
+                                    size="sm"
+                                    onClick={() => handleMarkTaken(medication.id, index, true)}
+                                    className="w-8 h-8 p-0 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full"
+                                    aria-label="Mark as taken"
+                                  >
+                                    <Check className="w-4 h-4" />
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => handleMarkTaken(medication.id, index, false)}
+                                    className="w-8 h-8 p-0 border-red-300 text-red-600 hover:bg-red-50 rounded-full"
+                                    aria-label="Mark as not taken"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              )}
                             </div>
                           </div>
-                        )
-                      )}
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -591,18 +449,10 @@ export default function MedicationManagement() {
                       <span>7-Day Schedule Overview</span>
                     </h4>
                     <div className="space-y-3">
-                      {Array.from(
-                        new Set(
-                          medication.schedule.map((s: Schedule) => s.date)
-                        )
-                      ).map((date: string) => {
-                        const daySchedule = medication.schedule.filter(
-                          (s: Schedule) => s.date === date
-                        );
-                        const dayTaken = daySchedule.filter(
-                          (s: Schedule) => s.taken
-                        ).length;
-                        const dayTotal = daySchedule.length;
+                      {Array.from(new Set(medication.schedule.map((s: Schedule) => s.date))).map((date: string) => {
+                        const daySchedule = medication.schedule.filter((s: Schedule) => s.date === date)
+                        const dayTaken = daySchedule.filter((s: Schedule) => s.taken).length
+                        const dayTotal = daySchedule.length
                         return (
                           <div
                             key={date}
@@ -621,22 +471,16 @@ export default function MedicationManagement() {
                                   })}
                                 </span>
                                 <div className="flex space-x-1 mt-1">
-                                  {daySchedule.map(
-                                    (schedule: Schedule, idx: number) => (
-                                      <div
-                                        key={idx}
-                                        className={cn(
-                                          "w-3 h-3 rounded-full",
-                                          schedule.taken
-                                            ? "bg-emerald-500"
-                                            : "bg-gray-300"
-                                        )}
-                                        title={`${schedule.time} - ${
-                                          schedule.taken ? "Taken" : "Not taken"
-                                        }`}
-                                      />
-                                    )
-                                  )}
+                                  {daySchedule.map((schedule: Schedule, idx: number) => (
+                                    <div
+                                      key={idx}
+                                      className={cn(
+                                        "w-3 h-3 rounded-full",
+                                        schedule.taken ? "bg-emerald-500" : "bg-gray-300",
+                                      )}
+                                      title={`${schedule.time} - ${schedule.taken ? "Taken" : "Not taken"}`}
+                                    />
+                                  ))}
                                 </div>
                               </div>
                             </div>
@@ -644,18 +488,16 @@ export default function MedicationManagement() {
                               <span className="font-semibold text-gray-900">
                                 {dayTaken}/{dayTotal}
                               </span>
-                              <p className="text-sm text-gray-500">
-                                doses taken
-                              </p>
+                              <p className="text-sm text-gray-500">doses taken</p>
                             </div>
                           </div>
-                        );
+                        )
                       })}
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            );
+            )
           })}
         </div>
 
@@ -668,12 +510,9 @@ export default function MedicationManagement() {
                   <Pill className="w-8 h-8 text-gray-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    No medications prescribed
-                  </h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No medications prescribed</h3>
                   <p className="text-gray-600 mb-6">
-                    Add the first prescription to begin medication tracking and
-                    monitoring.
+                    Add the first prescription to begin medication tracking and monitoring.
                   </p>
                   <Button
                     onClick={() => setShowAddForm(true)}
@@ -689,5 +528,5 @@ export default function MedicationManagement() {
         )}
       </div>
     </div>
-  );
+  )
 }
