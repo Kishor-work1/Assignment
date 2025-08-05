@@ -1,75 +1,108 @@
-"use client"
+"use client";
 
-import { Activity, Calendar, Pill, User, AlertTriangle, Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { usePatient } from "@/context/PatientContext"
-import { useState, useEffect, useRef } from "react"
+import {
+  Activity,
+  Calendar,
+  Pill,
+  User,
+  AlertTriangle,
+  Menu,
+  X,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { usePatient } from "@/context/PatientContext";
+import { useState, useEffect, useRef } from "react";
 
 export function Sidebar() {
-  const { activeSection, setActiveSection, selectedPatient } = usePatient()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const { activeSection, setActiveSection, selectedPatient } = usePatient();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
-    { id: "overview", label: "Overview", icon: User, description: "Patient information" },
-    { id: "vitals", label: "Vital Signs", icon: Activity, description: "Health metrics" },
-    { id: "medications", label: "Medications", icon: Pill, description: "Prescriptions" },
-    { id: "appointments", label: "Appointments", icon: Calendar, description: "Scheduled visits" },
-  ]
+    {
+      id: "overview",
+      label: "Overview",
+      icon: User,
+      description: "Patient information",
+    },
+    {
+      id: "vitals",
+      label: "Vital Signs",
+      icon: Activity,
+      description: "Health metrics",
+    },
+    {
+      id: "medications",
+      label: "Medications",
+      icon: Pill,
+      description: "Prescriptions",
+    },
+    {
+      id: "appointments",
+      label: "Appointments",
+      icon: Calendar,
+      description: "Scheduled visits",
+    },
+  ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "critical":
-        return "bg-gradient-to-r from-red-50 to-red-100 text-red-800 border-red-200 shadow-red-100"
+        return "bg-gradient-to-r from-red-50 to-red-100 text-red-800 border-red-200 shadow-red-100";
       case "monitoring":
-        return "bg-gradient-to-r from-amber-50 to-yellow-100 text-amber-800 border-amber-200 shadow-amber-100"
+        return "bg-gradient-to-r from-amber-50 to-yellow-100 text-amber-800 border-amber-200 shadow-amber-100";
       case "stable":
-        return "bg-gradient-to-r from-emerald-50 to-green-100 text-emerald-800 border-emerald-200 shadow-emerald-100"
+        return "bg-gradient-to-r from-emerald-50 to-green-100 text-emerald-800 border-emerald-200 shadow-emerald-100";
       default:
-        return "bg-gradient-to-r from-slate-50 to-gray-100 text-slate-800 border-slate-200 shadow-slate-100"
+        return "bg-gradient-to-r from-slate-50 to-gray-100 text-slate-800 border-slate-200 shadow-slate-100";
     }
-  }
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "critical":
-        return <AlertTriangle className="w-4 h-4" />
+        return <AlertTriangle className="w-4 h-4" />;
       case "monitoring":
-        return <Activity className="w-4 h-4" />
+        return <Activity className="w-4 h-4" />;
       case "stable":
-        return <div className="w-4 h-4 bg-emerald-500 rounded-full animate-pulse" />
+        return (
+          <div className="w-4 h-4 bg-emerald-500 rounded-full animate-pulse" />
+        );
       default:
-        return <div className="w-4 h-4 bg-slate-400 rounded-full" />
+        return <div className="w-4 h-4 bg-slate-400 rounded-full" />;
     }
-  }
+  };
 
   // Handle click outside to close mobile menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setIsMobileMenuOpen(false)
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
       }
-    }
+    };
 
     if (isMobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isMobileMenuOpen])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
 
-  if (!selectedPatient) return null
+  if (!selectedPatient) return null;
 
   const handleMenuClick = (sectionId: string) => {
-    setActiveSection(sectionId)
-    setIsMobileMenuOpen(false) 
-  }
+    setActiveSection(sectionId);
+    setIsMobileMenuOpen(false);
+  };
 
   const handleCloseMenu = () => {
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -94,7 +127,9 @@ export function Sidebar() {
         ref={sidebarRef}
         className={cn(
           "fixed lg:relative inset-y-0 left-0 z-50 bg-white border-r border-slate-200 flex flex-col transform transition-all duration-300 ease-in-out shadow-2xl lg:shadow-none lg:bg-gradient-to-b lg:from-white lg:via-slate-50/50 lg:to-white lg:border-slate-200/60 lg:backdrop-blur-sm",
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0", 
+          isMobileMenuOpen
+            ? "translate-x-0"
+            : "-translate-x-full lg:translate-x-0",
           "w-64 lg:w-64 md:w-56 sm:w-48"
         )}
       >
@@ -114,30 +149,34 @@ export function Sidebar() {
                   <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                     HealthCare
                   </h1>
-                  <p className="text-sm text-slate-600 font-medium">Patient Dashboard</p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    Patient Dashboard
+                  </p>
                 </div>
               </div>
-              {/* Close button */}
-              {isMobileMenuOpen && (
-                <button
-                  onClick={handleCloseMenu}
-                  className="absolute top-1 right-1 lg:hidden p-2 cursor-pointer hover:bg-red-50 hover:text-red-600 rounded-xl transition-all duration-300 hover:scale-110 group"
-                >
-                  <X className="w-5 h-5 text-slate-600 group-hover:text-red-600 transition-colors duration-300" />
-                </button>
-              )}
             </div>
           </div>
+          {/* Close button */}
+          {isMobileMenuOpen && (
+            <button
+              onClick={handleCloseMenu}
+              className="absolute top-1 right-2 lg:hidden p-2 cursor-pointer hover:bg-red-50 hover:text-red-600 rounded-xl transition-all duration-300 hover:scale-110 group z-50"
+            >
+              <X className="w-5 h-5 text-slate-600 group-hover:text-red-600 transition-colors duration-300" />
+            </button>
+          )}
         </div>
 
         {/* Patient Status */}
         <div className="p-4">
           <div className="relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
-            <div className={cn(
-              "relative px-4 py-3 rounded-xl text-sm font-semibold capitalize border shadow-sm transition-all duration-300 hover:shadow-md group-hover:scale-105",
-              getStatusColor(selectedPatient.status)
-            )}>
+            <div
+              className={cn(
+                "relative px-4 py-3 rounded-xl text-sm font-semibold capitalize border shadow-sm transition-all duration-300 hover:shadow-md group-hover:scale-105",
+                getStatusColor(selectedPatient.status)
+              )}
+            >
               <div className="flex items-center space-x-2">
                 {getStatusIcon(selectedPatient.status)}
                 <span>Patient Status: {selectedPatient.status}</span>
@@ -152,8 +191,8 @@ export function Sidebar() {
             Navigation
           </div>
           {menuItems.map((item, index) => {
-            const Icon = item.icon
-            const isActive = activeSection === item.id
+            const Icon = item.icon;
+            const isActive = activeSection === item.id;
             return (
               <div
                 key={item.id}
@@ -166,39 +205,51 @@ export function Sidebar() {
                     "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 text-sm lg:text-base cursor-pointer relative overflow-hidden group/btn",
                     isActive
                       ? "bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200/60 shadow-lg shadow-blue-100/50 scale-105"
-                      : "text-slate-700 hover:bg-gradient-to-r hover:from-slate-50 hover:to-slate-100 hover:text-slate-900 hover:shadow-md hover:scale-102 border border-transparent hover:border-slate-200/60",
+                      : "text-slate-700 hover:bg-gradient-to-r hover:from-slate-50 hover:to-slate-100 hover:text-slate-900 hover:shadow-md hover:scale-102 border border-transparent hover:border-slate-200/60"
                   )}
                 >
                   {isActive && (
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-xl"></div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-full group-hover/btn:translate-x-[-200%] transition-transform duration-700"></div>
-                  
-                  <div className={cn(
-                    "relative w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300",
-                    isActive 
-                      ? "bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/25" 
-                      : "bg-gradient-to-br from-slate-100 to-slate-200 group-hover/btn:from-blue-100 group-hover/btn:to-indigo-100"
-                  )}>
-                    <Icon className={cn(
-                      "w-4 h-4 transition-all duration-300",
-                      isActive 
-                        ? "text-white scale-110" 
-                        : "text-slate-600 group-hover/btn:text-blue-600 group-hover/btn:scale-110"
-                    )} />
+
+                  <div
+                    className={cn(
+                      "relative w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300",
+                      isActive
+                        ? "bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/25"
+                        : "bg-gradient-to-br from-slate-100 to-slate-200 group-hover/btn:from-blue-100 group-hover/btn:to-indigo-100"
+                    )}
+                  >
+                    <Icon
+                      className={cn(
+                        "w-4 h-4 transition-all duration-300",
+                        isActive
+                          ? "text-white scale-110"
+                          : "text-slate-600 group-hover/btn:text-blue-600 group-hover/btn:scale-110"
+                      )}
+                    />
                   </div>
-                  
+
                   <div className="relative flex-1 min-w-0">
-                    <span className={cn(
-                      "font-semibold truncate block transition-all duration-300",
-                      isActive ? "text-blue-800" : "group-hover/btn:text-slate-900"
-                    )}>
+                    <span
+                      className={cn(
+                        "font-semibold truncate block transition-all duration-300",
+                        isActive
+                          ? "text-blue-800"
+                          : "group-hover/btn:text-slate-900"
+                      )}
+                    >
                       {item.label}
                     </span>
-                    <span className={cn(
-                      "text-xs truncate block transition-all duration-300",
-                      isActive ? "text-blue-600" : "text-slate-500 group-hover/btn:text-slate-700"
-                    )}>
+                    <span
+                      className={cn(
+                        "text-xs truncate block transition-all duration-300",
+                        isActive
+                          ? "text-blue-600"
+                          : "text-slate-500 group-hover/btn:text-slate-700"
+                      )}
+                    >
                       {item.description}
                     </span>
                   </div>
@@ -208,7 +259,7 @@ export function Sidebar() {
                   )}
                 </button>
               </div>
-            )
+            );
           })}
         </nav>
 
@@ -219,5 +270,5 @@ export function Sidebar() {
         </div>
       </div>
     </>
-  )
+  );
 }
